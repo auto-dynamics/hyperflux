@@ -8,6 +8,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { ProcessScheme } from "./lib";
+import { QueryResponseStatus } from "./lib/queries/types";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -33,7 +34,7 @@ export async function insertScheme({
 }: {
   name: string;
   scheme: ProcessScheme;
-}) {
+}): Promise<QueryResponseStatus> {
   const document = doc(firestore, `/${name}/${scheme.id}`);
   await setDoc(document, scheme);
   return {
